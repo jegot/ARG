@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    <title>Ana's Report Generator</title>
+
+    <style>
+        body{ 
+            font-family: Verdana, Geneva, sans-serif; 
+            padding: 10%;
+            position: relative;
+        }
+
+        h1{ 
+            font-size: 22px; 
+            letter-spacing: 2px;
+            word-spacing: 2px; 
+        }
+        form {
+            margin: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0d183d;
+        }
+    </style>
+</head>
+<body>
+    <!--http://localhost:8080/-->
+    <h1>Ana's Report Generator</h1>
+    <form action="/generate-report" method="get">
+        <label for="date">Date (MM/DD/YYYY) <i>3/17/2022</i> :</label>
+        <input type="text" id="date" name="date" required>
+        <button type="submit">Generate Today's Reports</button>
+    </form>
+</body>
+</html>
