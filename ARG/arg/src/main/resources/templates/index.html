@@ -37,12 +37,17 @@
     </style>
 </head>
 <body>
+    
     <!--http://localhost:8080/-->
     <h1>Ana's Report Generator</h1>
     <form action="/generate-report" method="get">
         <label for="date">Date (MM/DD/YYYY) <i>3/17/2022</i> :</label>
         <input type="text" id="date" name="date" required>
-        <button type="submit">Generate Today's Reports</button>
+        <button type="submit">Generate Daily Reports</button>
+    </form>
+
+    <form action="/generate-monthly-operator-stats" method="get">
+        <button type="submit">Generate Operator Statistics for This Month</button>
     </form>
 </body>
 </html>
