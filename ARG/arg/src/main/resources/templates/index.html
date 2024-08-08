@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    
 <head>
-    <title>Ana's Report Generator</title>
-
+    <title>ARG</title>
     <style>
-        body{ 
-            font-family: Verdana, Geneva, sans-serif; 
-            padding: 10%;
-            position: relative;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0aa79f; /* Dark blue background */
+            margin: 0;
+            padding: 0;
+            z-index: -1;
         }
 
-        h1{ 
-            font-size: 22px; 
-            letter-spacing: 2px;
-            word-spacing: 2px; 
+        .content {
+            background-color: #fdfcf7;
+            margin: 0 15%; 
+            opacity: 85%;
+            text-align: center;
+            padding: 5% 0;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+            position: relative; /* Required for z-index */
+            min-height: 300px;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+            z-index: 1;
         }
+
+        h1 {
+            font-size: 42px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
         form {
             margin: 20px;
+            font-size: 20;
         }
+
         button {
             background-color: #4CAF50;
             color: white;
@@ -31,23 +48,83 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
         button:hover {
             background-color: #0d183d;
+        }
+
+        /* Sticky Waves at Bottom */
+        .waves {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            z-index: 0; /* Behind other content */
+        }
+
+        /* Rocking Ship Animation */
+        @keyframes rocking {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(4deg); }
+        }
+
+        .ship {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: rocking 3s ease-in-out infinite;
+            z-index: 2; /* Above waves */
+            width: 15%;
+            height: auto;
+            padding-bottom: 3%;
+        }
+
+        .report-stuff{
+            z-index: 4;
+            position: relative;
         }
     </style>
 </head>
 <body>
-    
-    <!--http://localhost:8080/-->
-    <h1>Ana's Report Generator</h1>
-    <form action="/generate-report" method="get">
-        <label for="date">Date (MM/DD/YYYY) <i>3/17/2022</i> :</label>
-        <input type="text" id="date" name="date" required>
-        <button type="submit">Generate Daily Reports</button>
-    </form>
 
-    <form action="/generate-monthly-operator-stats" method="get">
-        <button type="submit">Generate Operator Statistics for This Month</button>
-    </form>
+    <!-- localhost:8080 -->
+    <div class="content">
+        <div class = "report-stuff">
+                <h1>Ana's Report Generator</h1>
+            <form action="/generate-report" method="get">
+
+            <label for="date">Date for reports (M/DD/YYYY) <i>e.g., 3/17/2022</i> :</label>
+            <input type="text" id="date" name="date" required>
+            <button type="submit">Generate Report</button>
+        </form>
+
+        <!-- <form action="/generate-monthly-operator-stats" method="get">
+            <button type="submit">Generate Operator Stats for This Month [IN BETA]</button>
+            <input list = "months">
+            <datalist id="months">
+                <option value="January"></option>
+                <option value="February"></option>
+                <option value="March"></option>
+                <option value="April"></option>
+                <option value="May"></option>
+                <option value="June"></option>
+                <option value="July"></option>
+                <option value="August"></option>
+                <option value="September"></option>
+                <option value="October"></option>
+                <option value="November"></option>
+                <option value="December"></option>
+            </datalist> 
+        </form> -->
+
+
+        </div>
+    </div>
+
+    <img src="/imgs/1686508.png" class="waves" alt="waves">
+    <img src="/imgs/ship2.png" class="ship" alt="ship">
+
 </body>
 </html>
