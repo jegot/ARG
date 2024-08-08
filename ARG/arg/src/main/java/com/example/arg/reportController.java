@@ -26,13 +26,23 @@ public class reportController {
         return "index";
     }
 
-    public String reportPath = "C:/Users/jgolling/Desktop/programming/ARG/thisReport.pdf";
-
     @GetMapping("/generate-report")
     public ResponseEntity<InputStreamResource> generateReport(@RequestParam("date") String date) {
         try {
-            reportPath = "C:/Users/jgolling/Desktop/programming/ARG/Report_.pdf";
+            // Replace the slashes in the date string with dashes
+            String pathDate = date.replace('/', '-');
     
+            //String userHome = System.getProperty("user.home");
+            String reportFilename = "Report_" + pathDate + ".pdf";
+
+            String reportPath = "Y:/Machine Reports/reports/" + reportFilename;
+
+            
+
+    
+            // Check if the report already exists
+            File file = new File(reportPath);
+            
             List<String> machineNames = new ArrayList<>();
             machineNames.add("INKJET1");
             machineNames.add("INKJET2");
@@ -41,32 +51,44 @@ public class reportController {
             machineNames.add("INKJET5");
             machineNames.add("INKJET6");
             machineNames.add("INSERT1");
-            machineNames.add("INSERTER 9");
+            machineNames.add("INSERT2");
+            machineNames.add("INSERT3");
+            machineNames.add("INSERT4");
+            machineNames.add("INSERT5");
+            machineNames.add("INSERT6");
+            machineNames.add("INSERT7");
+            machineNames.add("INSERT8");
+            machineNames.add("INSERT9");
+            machineNames.add("INSERT10");
+            machineNames.add("INSERT11");
     
             List<List<String[]>> allData = new ArrayList<>();
     
             for (String machine : machineNames) {
-                // Read data from the Excel file for the specified date
-                List<String[]> data = excelService.readExcel(date, machine);
+                    // Read data from the Excel file for the specified date
+                    List<String[]> data = excelService.readExcel(date, machine);
     
-                if (data != null && !data.isEmpty()) {
-                    allData.add(data);
+                    if (data != null && !data.isEmpty()) {
+                        allData.add(data);
+                    }
                 }
-            }
     
             if (!allData.isEmpty()) {
-                // Generate the PDF report with all data
-                excelService.generatePdfReport(allData, reportPath, date);
-            }
-    
+                    // Generate the PDF report with all data
+                    excelService.generatePdfReport(allData, reportPath, date);
+                }
+
+            
+            if (!file.exists()) {
+                    throw new IOException("Failed to create the report file.");
+                }
+         
+
             // Create the PDF file response
-            File file = new File(reportPath);
-            System.out.println("Creating file: " + reportPath);
-    
             InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-    
+
             HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=report.pdf");
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + reportFilename);
             return ResponseEntity.ok()
                     .headers(headers)
                     .contentLength(file.length())
@@ -76,10 +98,5 @@ public class reportController {
             e.printStackTrace();
             return ResponseEntity.status(500).build();
         }
-
-}
-
-
-
-    
+    }
 }
