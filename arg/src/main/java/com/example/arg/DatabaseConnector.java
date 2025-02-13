@@ -8,9 +8,9 @@ public class DatabaseConnector {
     private static Connection connection;
 
     public void connect() throws SQLException {
-        String url = "jdbc:mysql://192.168.0.189:3306/datastore";
-        String user = "readuser";
-        String password = "Password1";
+        String url = "jdbc:mysql://123.456.7.891:2345/datastore"; //update with real URL
+        String user = "";
+        String password = "";
         connection = DriverManager.getConnection(url, user, password);
         connection.setReadOnly(true);
     }
