@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ARG</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0aa79f; /* Dark blue background */
+            margin: 0;
+            padding: 0;
+            z-index: -1;
+        }
+
+        .content {
+            background-color: #fdfcf7;
+            margin: 0 15%; 
+            opacity: 85%;
+            text-align: center;
+            padding: 5% 0;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+            position: relative; /* Required for z-index */
+            min-height: 300px;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 42px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin: 20px;
+            font-size: 20;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0d183d;
+        }
+
+        /* Sticky Waves at Bottom */
+        .waves {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            z-index: 0; /* Behind other content */
+        }
+
+        /* Rocking Ship Animation */
+        @keyframes rocking {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(4deg); }
+        }
+
+        .ship {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: rocking 3s ease-in-out infinite;
+            z-index: 2; /* Above waves */
+            width: 15%;
+            height: auto;
+            padding-bottom: 3%;
+        }
+
+        .report-stuff{
+            z-index: 4;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- localhost:8080 -->
+    <div class="content">
+        <div class = "report-stuff">
+                <h1>ARG 2.0</h1>
+            <form action="/generate-report" method="get">
+
+            <label for="date">Date for reports:</label>
+            <input type="date" id="date" name="date" required>
+            <button type="submit">Generate Report</button>
+        </form>
+
+        <form action="/generate-job-specific-report" method="get">
+            <label>Enter job number:</label>
+            <input type="text" id="jobNumber" name="jobNumber" required>
+            <button type="submit">Generate Job Report</button>
+            
+        </form>
+
+
+        </div>
+    </div>
+
+    <img src="/imgs/1686508.png" class="waves" alt="waves">
+    <img src="/imgs/ship2.png" class="ship" alt="ship">
+
+</body>
+</html>
