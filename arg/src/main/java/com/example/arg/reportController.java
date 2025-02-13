@@ -24,9 +24,6 @@ import java.time.format.DateTimeFormatter;
 @Controller
 public class reportController {
 
-    /* @Autowired
-    private ExcelService excelService; */
-
     @GetMapping("/")
     public String index() {
         return "index";
@@ -49,7 +46,7 @@ public class reportController {
         String formattedDate = localDate.format(formatter);
 
         String reportFilename = "Report_" + date + ".pdf";
-        String reportPath = "Y:/Machine Reports/NewReports/" + reportFilename;
+        String reportPath = "" + reportFilename;
 
         try {
             generator.generatePdf(reportPath, formattedDate);
